@@ -13,23 +13,43 @@ export default function Form () {
     const validate = () => {
         const errors = {};
 
+        console.log(name);
+        console.log('email', email);
+        console.log(phone);
+        console.log(phoneType);
+        console.log(bio);
+        console.log(role);
+        console.log(emailNotice);
+
         if(!name) errors.name = "Name is required";
         if(!email) errors.email = "Email is required";
         if(phone && !phoneType) errors.phoneType= "Phone type is required if phone number is submitted";
         if(bio && bio.length > 280) errors.bio = "Maximum bio length is 280";
 
         if(phone) {
-            const parts= phone.split("-");
-
+            const parts = phone.split("-");
+            //console.log(parseInt(parts[2]));
             if (parts.length !== 3
                 || parts[0].length !== 3
                 || parts[1].length !== 3
                 || parts[2].length !== 4
-                || !isNaN(parseInt(parts[0]))
-                || !isNaN(parseInt(parts[1]))
-                || !isNaN(parseInt(parts[2]))
+                || isNaN(parts[0])
+                || isNaN(parts[1])
+                || isNaN(parts[2])
                 ) errors.phone = "Please format phone number correctly ex: 111-222-3333";
+        }
 
+        if(email) {
+            const parts = email.split('@');
+            const emailFormat = /^[A-Za-z0-9]+@[a-z]+.[a-z]+$/;
+
+            const regExTest = 'assadf.com';
+            const failTest = '#()*_)i(@';
+
+            console.log('HEREE')
+            console.log(regExTest.match(emailFormat));
+
+            //if(parts[0])
         }
 
         return errors;
